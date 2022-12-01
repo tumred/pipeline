@@ -25,11 +25,11 @@ class HttpTest extends TestCase
              $response->assertStatus(200);
    }
 
-  public function test_register_page() {
+  /** public function test_register_page() {
           $response = $this->get('/register');
           $response->assertStatus(200);
    }
-
+*/
    public function test_contact_page() {
            $response = $this->get('/contact');
            $response->assertStatus(200);
