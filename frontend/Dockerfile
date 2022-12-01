@@ -27,7 +27,7 @@ RUN php artisan key:generate
 RUN cd /var/www/html
 RUN find . -type d -exec chmod 775 {} \;; find . -type f -exec chmod 777 {} \;;
 RUN chown -R www-data:root .
-RuN vendor/bin/phpunit  --migrate-configuration
+RUN vendor/bin/phpunit  --migrate-configuration
 
 COPY seoland.conf /etc/apache2/sites-available
 RUN cd /etc/apache2/sites-available; a2ensite seoland.conf; a2dissite 000-default.conf
