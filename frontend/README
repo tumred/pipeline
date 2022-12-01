@@ -1,0 +1,27 @@
+0. Create mysql container
+	- docker run --name mysqlserver -e MYSQL_ROOT_PASSWORD=seoland2022 -d mysql 
+	
+1. Create databse:
+	- create database seoland;
+
+2. Make migrations
+	- php artisan migrate
+
+3. Create user OR import seoland.sql file:
+	- php artisan tinker
+	- DB::table('users')->insert(['name'=>'admin','email'=>'admin@seoland.com','password'=>Hash::make('seoland')])
+	
+	- mysql -h 172.17.0.2 -u root --password=seoland2022 seoland < seoland.sql
+
+4. Change user role:
+	- update users set role=1 where id=1;   # id specify user ID to be modified
+
+5. Update email verification:
+	- update settings set value="0" where name="registration_verification";
+
+6. Run container 
+	- DB_HOST=$(docker inspect mysqlserver | jq -r .[].NetworkSettings.Networks.bridge.IPAddress )
+	- docker run -dti --name frontend -h seoland --add-host database:$DB_HOST -p 7777:80 image_name
+
+7. Start apache server:
+	- docker exec -i -u root container_name bash -c "/etc/init.d/apache2 start"
